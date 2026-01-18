@@ -206,15 +206,18 @@ function ParallaxDivider() {
     offset: ["start end", "end start"]
   });
 
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
   const y = useTransform(scrollYProgress, [0, 1], [-50, 50]);
   const opacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 1, 0]);
 
   return (
     <section ref={ref} id="parallax" className="h-[60vh] relative overflow-hidden flex items-center justify-center">
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
+      <motion.div 
+        className="absolute inset-0 z-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1558494949-ef526b01201b?w=1920&q=80')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1920&q=80')",
+          x,
+          width: "120%",
           filter: "brightness(0.8) contrast(1.1)"
         }}
       />

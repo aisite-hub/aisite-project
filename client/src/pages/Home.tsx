@@ -4,10 +4,7 @@ import { Brain, Eye, Cpu, ArrowRight, CheckCircle2 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useCreateSubscriber } from "@/hooks/use-subscribers";
-import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertSubscriberSchema } from "@shared/schema";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -242,14 +239,13 @@ function ParallaxDivider() {
 function NewsletterSection() {
   const { mutate, isPending } = useCreateSubscriber();
   
-  const form = useForm<z.infer<typeof insertSubscriberSchema>>({
-    resolver: zodResolver(insertSubscriberSchema),
+  const form = useForm<{ email: string }>({
     defaultValues: {
       email: ""
     }
   });
 
-  const onSubmit = (data: z.infer<typeof insertSubscriberSchema>) => {
+  const onSubmit = (data: { email: string }) => {
     mutate(data, {
       onSuccess: () => form.reset()
     });

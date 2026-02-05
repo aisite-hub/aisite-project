@@ -15,16 +15,17 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { name: "Vision", href: "#features" },
-    { name: "Technology", href: "#parallax" },
-    { name: "Join Access", href: "#newsletter" },
+    { name: "Servicios", href: "#features" },
+    { name: "Quienes somos", href: "#parallax" },
+      { name: "FAQ", href: "#faq" },
+    { name: "Contacto", href: "#newsletter" },
   ];
 
   const demoItems = [
-    { name: "Demo 1", href: "#" },
-    { name: "Demo 2", href: "#" },
-    { name: "Demo 3", href: "#" },
-    { name: "Demo 4", href: "#" },
+    { name: "Consultorio Dental", href: "#" },
+    { name: "Nutriologo", href: "#" },
+    { name: "Gimnasio", href: "#" },
+    { name: "Fisioterapeuta", href: "#" },
   ];
 
   return (
@@ -58,7 +59,7 @@ export default function Navigation() {
               onMouseEnter={() => setDemosOpen(true)}
               className="flex items-center gap-1 text-sm uppercase tracking-widest font-semibold text-slate-600 hover:text-primary transition-colors"
             >
-              Demos <ChevronDown className={`w-4 h-4 transition-transform ${demosOpen ? 'rotate-180' : ''}`} />
+              Sitios Demo <ChevronDown className={`w-4 h-4 transition-transform ${demosOpen ? 'rotate-180' : ''}`} />
             </button>
             <AnimatePresence>
               {demosOpen && (
@@ -87,7 +88,7 @@ export default function Navigation() {
             href="#newsletter"
             className="px-6 py-2 border border-primary text-primary font-display font-bold uppercase tracking-wider hover:bg-primary hover:text-white transition-all duration-300"
           >
-            Initialize
+            Agenda una llamada
           </a>
         </div>
 

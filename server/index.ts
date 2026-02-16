@@ -90,7 +90,7 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || "4321", 10);
-httpServer.listen(
+  httpServer.listen(
     {
       port,
       host: "127.0.0.1", // Changed from 0.0.0.0
@@ -98,6 +98,9 @@ httpServer.listen(
     },
     () => {
       log(`serving on port ${port}`);
+      if (process.env.NODE_ENV !== "production") {
+        log(`open http://127.0.0.1:${port} or http://localhost:${port}`);
+      }
     },
   );
 })();

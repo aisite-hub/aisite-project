@@ -171,9 +171,11 @@ function HeroSection() {
             IA PARA EMPRENDEDORES
           </div>
 
-          <h1 className="font-display font-bold leading-tight md:leading-none mb-6 text-slate-900">
-            <span className="text-[4rem] block">ESCALA TU NEGOCIO CON</span>
-            <span className="text-[6rem] text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-600 to-secondary text-glow block">
+          <h1 className="font-display font-bold leading-[0.95] md:leading-none mb-6 text-slate-900 max-w-5xl mx-auto">
+            <span className="block text-[clamp(1.9rem,10vw,4rem)]">
+              ESCALA TU NEGOCIO CON
+            </span>
+            <span className="block text-[clamp(2.2rem,12vw,6rem)] break-words text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-600 to-secondary text-glow">
               INTELIGENCIA ARTIFICIAL
             </span>
           </h1>

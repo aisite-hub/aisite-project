@@ -1,0 +1,50 @@
+name: Deploy to Namecheap Production
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      PROD_HOST: 198.54.114.131
+      PROD_PORT: 22
+      PROD_PATH: public_html/
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Add SPA fallback
+        run: cp dist/public/index.html dist/public/404.html
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PROD_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Add server to known_hosts
+        run: ssh-keyscan -p "$PROD_PORT" "$PROD_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy dist/public with sync cleanup
+        run: |
+          rsync -az --delete \
+            -e "ssh -p $PROD_PORT" \
+            dist/public/ "${{ secrets.PROD_SSH_USER }}@$PROD_HOST:$PROD_PATH"

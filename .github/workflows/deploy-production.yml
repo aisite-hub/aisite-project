@@ -12,7 +12,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      PROD_HOST: 198.54.114.131
+      PROD_HOST: creacionlabs.ai
       PROD_PORT: 22
       PROD_PATH: public_html/
     steps:
@@ -41,7 +41,30 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
 
       - name: Add server to known_hosts
-        run: ssh-keyscan -p "$PROD_PORT" "$PROD_HOST" >> ~/.ssh/known_hosts
+        run: |
+          set -euo pipefail
+          touch ~/.ssh/known_hosts
+          scanned="false"
+          for attempt in 1 2 3; do
+            if ssh-keyscan -T 10 -p "$PROD_PORT" "$PROD_HOST" >> ~/.ssh/known_hosts 2>/dev/null; then
+              scanned="true"
+              break
+            fi
+            echo "ssh-keyscan attempt $attempt failed, retrying..."
+            sleep 5
+          done
+          if [ "$scanned" != "true" ]; then
+            echo "::error::Unable to fetch SSH host key from $PROD_HOST:$PROD_PORT"
+            echo "::error::Verify SSH hostname/port in cPanel (shared hosting often does not use IP:22)."
+            exit 1
+          fi
+
+      - name: Verify SSH login
+        run: |
+          ssh -p "$PROD_PORT" \
+            -o BatchMode=yes \
+            -o ConnectTimeout=15 \
+            "${{ secrets.PROD_SSH_USER }}@$PROD_HOST" "echo SSH connection successful"
 
       - name: Deploy dist/public with sync cleanup
         run: |

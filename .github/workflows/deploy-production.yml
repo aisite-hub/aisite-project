@@ -37,7 +37,8 @@ jobs:
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.PROD_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          printf '%s\n' "${{ secrets.PROD_SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
           chmod 600 ~/.ssh/id_rsa
 
       - name: Add server to known_hosts
@@ -62,12 +63,14 @@ jobs:
       - name: Verify SSH login
         run: |
           ssh -p "$PROD_PORT" \
+            -i ~/.ssh/id_rsa \
             -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
             -o ConnectTimeout=15 \
             "${{ secrets.PROD_SSH_USER }}@$PROD_HOST" "echo SSH connection successful"
 
       - name: Deploy dist/public with sync cleanup
         run: |
           rsync -az --delete \
-            -e "ssh -p $PROD_PORT" \
+            -e "ssh -p $PROD_PORT -i ~/.ssh/id_rsa -o IdentitiesOnly=yes" \
             dist/public/ "${{ secrets.PROD_SSH_USER }}@$PROD_HOST:$PROD_PATH"

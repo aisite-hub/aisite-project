@@ -4,6 +4,10 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 function getBasePath() {
+  if (process.env.VITE_BASE) {
+    return process.env.VITE_BASE;
+  }
+
   if (process.env.GITHUB_ACTIONS !== "true") {
     return "/";
   }

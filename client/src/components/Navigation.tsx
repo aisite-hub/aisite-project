@@ -39,7 +39,7 @@ export default function Navigation() {
           href='/'
           className='text-2xl font-bold font-display tracking-widest flex items-center gap-2'
         >
-          <span className='text-primary text-3xl'>CREACI&OACUTE;N</span>
+          <span className='text-primary text-3xl'>CREACIÓN</span>
           <span className='opacity-70 text-slate-900'>LABS</span>
         </Link>
 

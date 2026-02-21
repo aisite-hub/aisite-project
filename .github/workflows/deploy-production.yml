@@ -12,7 +12,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      PROD_HOST: creacionlabs.ai
+      PROD_HOST: ${{ secrets.PROD_SSH_HOST }}
       PROD_PORT: 21098
       PROD_PATH: public_html/
     steps:

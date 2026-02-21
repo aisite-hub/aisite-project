@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROD_HOST: creacionlabs.ai
-      PROD_PORT: 22
+      PROD_PORT: 21098
       PROD_PATH: public_html/
     steps:
       - name: Checkout

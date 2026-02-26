@@ -81,7 +81,7 @@ export default function Home() {
       />
 
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-secondary z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-purple-500 to-secondary z-[100] origin-left"
         style={{ scaleX }}
       />
 

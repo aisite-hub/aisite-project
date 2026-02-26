@@ -3,11 +3,19 @@ import { motion } from "framer-motion";
 import { AlertTriangle, ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import mainBackground from "../assets/main-background.png";
 
 export default function NotFound() {
   return (
     <div className="bg-background min-h-screen text-foreground selection:bg-primary/20">
+      <SEO
+        title="404 | Pagina no encontrada | Creacion Labs"
+        description="La pagina que buscas no existe. Vuelve al inicio para conocer nuestras soluciones de inteligencia artificial."
+        path="/404"
+        noindex
+      />
+
       <Navigation />
 
       <section className="relative min-h-[calc(100vh-160px)] flex items-center justify-center overflow-hidden pt-20">

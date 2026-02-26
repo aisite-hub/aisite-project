@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { useCreateSubscriber } from "@/hooks/use-subscribers";
 import { useForm } from "react-hook-form";
 import mainBackground from "../assets/main-background.png";
@@ -21,6 +22,46 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 export default function Home() {
+  const siteUrl =
+    (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(
+      /\/+$/,
+      "",
+    ) || "https://creacionlabs.ai";
+
+  const homeStructuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Creacion Labs",
+      url: `${siteUrl}/`,
+      inLanguage: "es-MX",
+      description:
+        "Automatizacion con inteligencia artificial para negocios que quieren crecer, vender mas y ahorrar tiempo.",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Creacion Labs",
+      url: `${siteUrl}/`,
+      logo: `${siteUrl}/favicon.png`,
+      sameAs: [],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Creacion Labs - Automatizacion con Inteligencia Artificial",
+      url: `${siteUrl}/`,
+      description:
+        "Soluciones de inteligencia artificial para automatizar atencion al cliente, agenda de citas y procesos de venta.",
+      inLanguage: "es-MX",
+      isPartOf: {
+        "@type": "WebSite",
+        url: `${siteUrl}/`,
+        name: "Creacion Labs",
+      },
+    },
+  ];
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -30,6 +71,15 @@ export default function Home() {
 
   return (
     <div className="bg-background min-h-screen text-foreground selection:bg-primary/20">
+      <SEO
+        title="Creacion Labs | Automatizacion con Inteligencia Artificial para Negocios"
+        description="Escala tu negocio con inteligencia artificial: automatiza atencion al cliente, respuestas por WhatsApp, agenda de citas y captacion de nuevos clientes."
+        path="/"
+        image="/favicon.png"
+        keywords="inteligencia artificial para negocios, automatizacion de ventas, chatbot para empresas, automatizacion de whatsapp, IA para emprendedores"
+        structuredData={homeStructuredData}
+      />
+
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-secondary z-[100] origin-left"
         style={{ scaleX }}

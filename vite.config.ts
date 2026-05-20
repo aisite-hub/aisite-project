@@ -21,7 +21,7 @@ function getBasePath() {
 }
 
 export default defineConfig({
-  base: getBasePath(),
+  base: process.env.NODE_ENV === "production" ? "/" : getBasePath(),
   plugins: [
     react(),
     runtimeErrorOverlay(),

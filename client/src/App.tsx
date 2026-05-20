@@ -27,6 +27,10 @@ function App() {
       webhookUrl: 'https://n8n-n8n.2dagyj.easypanel.host/webhook/8aaad4e6-bcbb-4e1d-9a2f-38dc9647dfa4/chat',
       mode: 'window', // Creates a floating bubble in the corner
       showWelcomeScreen: true,
+      initialMessages: [
+      '¡Hola! 👋',
+      'Soy Alex, asistente virtual de CreacionLabs, ¿cómo puedo ayudarte hoy?'
+    ],
       i18n: {
         en: {
           title: 'Creación Labs',

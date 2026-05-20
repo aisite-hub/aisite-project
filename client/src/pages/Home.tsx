@@ -21,6 +21,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import comoFunciona from '../assets/como_funciona.png';
+import comoQuienEs from '../assets/para_quien_es.png';
+import realEstate from '../assets/realestate.png';
 export default function Home() {
   const siteUrl =
     (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(
@@ -281,22 +284,19 @@ function FeaturesSection() {
       title: 'Como funciona?',
       desc: 'Conectamos un sistema inteligente que aprende de tu negocio para atender a tus clientes y organizar tus ventas de forma automática.',
       icon: <Brain className='w-8 h-8 text-primary' />,
-      image:
-        'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80', // abstract tech lines
+      image: comoFunciona, // abstract tech lines
     },
     {
       title: 'Para quien es?',
       desc: 'Para dueños de negocios que busquen hacer mas ventas, tener mas clientes, reducir costos y llevar su negocio a otro nivel.',
       icon: <Eye className='w-8 h-8 text-secondary' />,
-      image:
-        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80', // cyber eye/lens
+      image: comoQuienEs, // cyber eye/lens
     },
     {
       title: 'Como me beneficia?',
       desc: 'Delegar las tareas a empleados virtuales de inteligencia artificial permite a tu negocio estar disponible las 24 hrs para no perder ventas ademas de ahorrar tiempo y dinero.',
       icon: <Cpu className='w-8 h-8 text-accent' />,
-      image:
-        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80', // abstract robot
+      image: realEstate, // abstract robot
     },
   ];
 

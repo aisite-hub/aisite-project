@@ -31,7 +31,7 @@ function App() {
         en: {
           title: 'Creación Labs',
           subtitle: 'Asistente Virtual',
-          placeholder: 'Resuelve tus dudas...',
+          placeholder: 'Resuelve tus dudas... ',
         }
       }
     });
